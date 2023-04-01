@@ -11,7 +11,7 @@ class Channel:
 
     def __init__(self, channel_id: str):
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
-        self.channel_id = channel_id
+        self.__channel_id = channel_id
         self.title = self.get_title()  # инициализирует название канала
         self.description = self.get_description()  # инициализирует описание канала
         self.url = self.get_url()  # инициализирует ссылку на канал

@@ -1,6 +1,5 @@
 import os
 import json
-
 from googleapiclient.discovery import build
 from accessify import private, protected
 

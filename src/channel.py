@@ -61,22 +61,44 @@ class Channel:
 
     @classmethod
     def get_service(cls):
-        api_key: str = os.getenv('YOUTUBE_API_KEY')
+        api_key: str = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
         youtube = build('youtube', 'v3', developerKey=api_key)
         return youtube
 
+    def __repr__(self):
+        """Получаем название канала в формате Youtube-канал: <название_канала>"""
+        return f"Youtube-канал: {self.get_title()}"
+
+    def __len__(self):
+        return len(self.get_subscriber_count())
+
+    def __add__(self, other):
+        return self.get_subscriber_count() + other.get_subscriber_count()
+
+    def __gt__(self, other):
+        return self.get_subscriber_count() > other.get_subscriber_count()
+
 vdud = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
 
-#vdud.print_info()
-print(vdud.get_title())
+# vdud.print_info()
+# print(vdud.get_title())
 
 # # получаем значения атрибутов
-print(vdud.title)
+#print(vdud.title)
 # вДудь
-print(vdud.video_count)
+# print(vdud.video_count)
 # 163
-print(vdud.url)
+# print(vdud.url)
 # https://www.youtube.com/channel/UCMCgOm8GZkHp8zJ6l7_hIuA
 
 # # можем получить объект для работы с API вне класса
-print(Channel.get_service())
+# print(Channel.get_service())
+# <googleapiclient.discovery.Resource object at 0x000002B1E54F9750>
+
+ch1 = Channel('UCMCgOm8GZkHp8zJ6l7_hIuA')
+ch2 = Channel('UC1eFXmJNkjITxPFWTy6RsWg')
+# print(ch1)
+# print(ch2)
+print(ch1 < ch2)
+print(ch1 > ch2)
+print(ch1 + ch2)
